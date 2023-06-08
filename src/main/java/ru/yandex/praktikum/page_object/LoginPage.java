@@ -4,13 +4,12 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.yandex.praktikum.user.UserCredentials;
 
 import java.time.Duration;
 
 public class LoginPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
     private final By loginText = By.xpath(".//main/div/h2");
     private final By emailField = By.xpath(".//*[@type='text']");
     private final By passwordField = By.xpath(".//*[@type='password']");
@@ -45,9 +44,9 @@ public class LoginPage {
     }
 
     @Step("Заполнить поля авторизации")
-    public void setUserData() {
+    public void setUserData(String email, String password) {
         waitForLoadLoginPage();
-        setLoginData(UserCredentials.fakeEmail, UserCredentials.fakePassword);
+        setLoginData(email, password);
     }
 
     public void setEmail(String email) {
@@ -62,7 +61,7 @@ public class LoginPage {
         driver.findElement(loginButton).click();
     }
 
-    public void setLoginData(String email,String password) {
+    public void setLoginData(String email, String password) {
         setEmail(email);
         setPassword(password);
         clickLoginButton();

@@ -11,7 +11,7 @@ import ru.yandex.praktikum.user.UserAPI;
 import ru.yandex.praktikum.user.UserCredentials;
 import static org.junit.Assert.assertTrue;
 
-public class LoginTest extends BrowserTest {
+public class LoginTest extends WebDriverShell {
 
     MainPage objMainPage;
     LoginPage objLoginPage;
@@ -43,7 +43,7 @@ public class LoginTest extends BrowserTest {
     public void checkUserAuthByLoginButton() {
         objMainPage.openMainPage();
         objMainPage.clickLoginButton();
-        objLoginPage.setUserData();
+        objLoginPage.setUserData(UserCredentials.fakeEmail, UserCredentials.fakePassword);
         objMainPage.waitForLoadHomePage();
         boolean isButtonVisible = objMainPage.isCreateOrderButtonDisplayed();
         assertTrue(isButtonVisible);
@@ -54,7 +54,7 @@ public class LoginTest extends BrowserTest {
     public void userAuthByPersonalCabinetButton() {
         objMainPage.openMainPage();
         objMainPage.clickPersonalCabinetButton();
-        objLoginPage.setUserData();
+        objLoginPage.setUserData(UserCredentials.fakeEmail, UserCredentials.fakePassword);
         objMainPage.waitForLoadHomePage();
         boolean isButtonVisible = objMainPage.isCreateOrderButtonDisplayed();
         assertTrue(isButtonVisible);
@@ -67,7 +67,7 @@ public class LoginTest extends BrowserTest {
         objMainPage.clickLoginButton();
         objLoginPage.clickRegistrationLink();
         objRegPage.clickLoginLink();
-        objLoginPage.setUserData();
+        objLoginPage.setUserData(UserCredentials.fakeEmail, UserCredentials.fakePassword);
         objMainPage.waitForLoadHomePage();
         boolean isButtonVisible = objMainPage.isCreateOrderButtonDisplayed();
         assertTrue(isButtonVisible);
@@ -80,7 +80,7 @@ public class LoginTest extends BrowserTest {
         objMainPage.clickLoginButton();
         objLoginPage.clickRecoverLink();
         objRecPassPage.clickLoginLink();
-        objLoginPage.setUserData();
+        objLoginPage.setUserData(UserCredentials.fakeEmail, UserCredentials.fakePassword);
         objMainPage.waitForLoadHomePage();
         boolean isButtonVisible = objMainPage.isCreateOrderButtonDisplayed();
         assertTrue(isButtonVisible);

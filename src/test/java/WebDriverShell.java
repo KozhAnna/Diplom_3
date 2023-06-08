@@ -3,7 +3,7 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.praktikum.service.WebDriverContainer;
 
-public class BrowserTest {
+public class WebDriverShell {
 
     protected WebDriver driver;
 

@@ -9,7 +9,7 @@ import ru.yandex.praktikum.user.UserAPI;
 import ru.yandex.praktikum.user.UserCredentials;
 import static org.junit.Assert.assertTrue;
 
-public class RegistrationTest extends BrowserTest {
+public class RegistrationTest extends WebDriverShell {
 
     MainPage objMainPage;
     LoginPage objLoginPage;
@@ -35,7 +35,7 @@ public class RegistrationTest extends BrowserTest {
 
         objMainPage.clickPersonalCabinetButton();
 
-        objLoginPage.setUserData();
+        objLoginPage.setUserData(UserCredentials.fakeEmail, UserCredentials.fakePassword);
 
         boolean isButtonVisible = objMainPage.isCreateOrderButtonDisplayed();
         assertTrue(isButtonVisible);

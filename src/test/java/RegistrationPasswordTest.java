@@ -10,7 +10,7 @@ import ru.yandex.praktikum.user.UserCredentials;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class RegistrationPasswordTest extends BrowserTest {
+public class RegistrationPasswordTest extends WebDriverShell {
 
     private final int passwordLength;
     private final boolean isCorrect;

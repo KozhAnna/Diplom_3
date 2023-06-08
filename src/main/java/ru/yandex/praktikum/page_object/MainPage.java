@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class MainPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public static final String MAIN_URL = "https://stellarburgers.nomoreparties.site/";
     private final By homeText = By.xpath(".//main/section[1]/h1");
@@ -19,13 +19,10 @@ public class MainPage {
     private final By createOrderButton = By.xpath(".//button[text() = 'Оформить заказ']");
     private final By constructorButton = By.xpath(".//p[text() = 'Конструктор']");
     private final By ingredientsContainer = By.className("constructor-element");
-    private final By headerCreateBurger = By.xpath(".//h1[text() = 'Соберите бургер']");
     private final By headerBuns = By.xpath(".//span[text() = 'Булки']");
     private final By headerSauce = By.xpath(".//span[text() = 'Соусы']");
     private final By headerFilling = By.xpath(".//span[text() = 'Начинки']");
-    private final By sectionBuns = By.xpath(".//h2[text() = 'Булки']");
-    private final By sectionSauce = By.xpath(".//h2[text() = 'Соусы']");
-    private final By sectionFilling = By.xpath(".//h2[text() = 'Начинки']");
+    private final By sectionCurrent = By.xpath(".//div[contains(@class,'tab_tab_type_current')]"); // Текущий выбранный раздел
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
@@ -59,6 +56,7 @@ public class MainPage {
     public boolean isIngredientsContainerVisible() {
         return driver.findElement(ingredientsContainer).isDisplayed();
     }
+
     @Step("Нажатие на секцию Булки")
     public void clickSectionBuns() {
         driver.findElement(headerBuns).click();
@@ -74,24 +72,24 @@ public class MainPage {
         driver.findElement(headerFilling).click();
     }
 
-    @Step("Проверка, что секция Булки видна")
-    public boolean isSectionBunsVisible() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(sectionBuns));
-        return driver.findElement(sectionBuns).isDisplayed();
+    @Step("Проверка, что секция Булки текущая")
+    public boolean isCurrentSectionBuns() {
+        return "Булки".equals(getCurrentSectionType());
     }
 
-    @Step("Проверка, что секция Булки видна")
-    public boolean isSectionSauceVisible() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(sectionSauce));
-        return driver.findElement(sectionSauce).isDisplayed();
+    @Step("Проверка, что секция Соусы текущая")
+    public boolean isCurrentSectionSauce() {
+        return "Соусы".equals(getCurrentSectionType());
     }
 
-    @Step("Проверка, что секция Булки видна")
-    public boolean isSectionFillingVisible() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(sectionFilling));
-        return driver.findElement(sectionFilling).isDisplayed();
+    @Step("Проверка, что секция Начинки текущая")
+    public boolean isCurrentSectionFilling() {
+        return "Начинки".equals(getCurrentSectionType());
     }
+
+    @Step("Получение названия текущего раздела")
+    public String getCurrentSectionType() {
+        return driver.findElement(sectionCurrent).getText();
+    }
+
 }

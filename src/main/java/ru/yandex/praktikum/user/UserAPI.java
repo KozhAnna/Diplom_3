@@ -8,6 +8,10 @@ import static io.restassured.RestAssured.given;
 
 public class UserAPI {
 
+    private static final String CREATE_USER_PATH = "api/auth/register";
+    private static final String LOGIN_USER_PATH = "api/auth/login";
+    public static final String DELETE_USER_PATH = "api/auth/user";
+
     @Step("Отправка запроса на создаение пользователя")
     public Response create(User user) {
         return given()
@@ -15,7 +19,7 @@ public class UserAPI {
                 .header("Content-type", "application/json")
                 .body(user)
                 .when()
-                .post("api/auth/register");
+                .post(CREATE_USER_PATH);
     }
 
     public Response login(UserCredentials user) {
@@ -24,7 +28,7 @@ public class UserAPI {
                 .header("Content-type", "application/json")
                 .body(user)
                 .when()
-                .post("api/auth/login");
+                .post(LOGIN_USER_PATH);
     }
 
     public void delete(String token){
@@ -33,7 +37,7 @@ public class UserAPI {
                 .contentType("application/json")
                 .header("Authorization", token)
                 .body(UserCredentials.from(UserCredentials.user))
-                .delete("api/auth/user");
+                .delete(DELETE_USER_PATH);
     }
 
 }

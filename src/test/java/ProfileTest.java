@@ -9,7 +9,7 @@ import ru.yandex.praktikum.user.UserCredentials;
 
 import static org.junit.Assert.assertTrue;
 
-public class ProfileTest extends BrowserTest {
+public class ProfileTest extends WebDriverShell {
 
     MainPage objMainPage;
     LoginPage objLoginPage;
@@ -41,7 +41,7 @@ public class ProfileTest extends BrowserTest {
     public void checkGetPersonalCabinetPage() {
         objMainPage.openMainPage();
         objMainPage.clickLoginButton();
-        objLoginPage.setUserData();
+        objLoginPage.setUserData(UserCredentials.fakeEmail, UserCredentials.fakePassword);
         objMainPage.clickPersonalCabinetButton();
         objProfilePage.waitForLoadPage();
         boolean isButtonVisible = objProfilePage.isLogoutLinkVisible();
@@ -53,7 +53,7 @@ public class ProfileTest extends BrowserTest {
     public void checkGetConstructorPageByConstructorButton() {
         objMainPage.openMainPage();
         objMainPage.clickLoginButton();
-        objLoginPage.setUserData();
+        objLoginPage.setUserData(UserCredentials.fakeEmail, UserCredentials.fakePassword);
         objMainPage.clickPersonalCabinetButton();
         objProfilePage.clickConstructButton();
         objMainPage.waitForLoadHomePage();
@@ -66,7 +66,7 @@ public class ProfileTest extends BrowserTest {
     public void getConstructorPageByLogo() {
         objMainPage.openMainPage();
         objMainPage.clickLoginButton();
-        objLoginPage.setUserData();
+        objLoginPage.setUserData(UserCredentials.fakeEmail, UserCredentials.fakePassword);
         objMainPage.clickPersonalCabinetButton();
         objProfilePage.clickLogo();
         objMainPage.waitForLoadHomePage();
@@ -79,7 +79,7 @@ public class ProfileTest extends BrowserTest {
     public void checkQuitFromProfile() {
         objMainPage.openMainPage();
         objMainPage.clickLoginButton();
-        objLoginPage.setUserData();
+        objLoginPage.setUserData(UserCredentials.fakeEmail, UserCredentials.fakePassword);
         objMainPage.clickPersonalCabinetButton();
         objProfilePage.clickLogoutButton();
         objLoginPage.waitForLoadLoginPage();

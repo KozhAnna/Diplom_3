@@ -3,7 +3,9 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.yandex.praktikum.page_object.MainPage;
 
-public class ConstructorTest extends BrowserTest {
+import static org.junit.Assert.assertEquals;
+
+public class ConstructorTest extends WebDriverShell {
 
     MainPage objMainPage;
 
@@ -16,28 +18,31 @@ public class ConstructorTest extends BrowserTest {
     @DisplayName("Переход к секции Булки")
     public void openSectionBunsTest() {
         objMainPage.openMainPage();
+        objMainPage.waitForLoadHomePage();
         objMainPage.clickConstructorButton();
-        objMainPage.clickSectionFilling();
+        objMainPage.clickSectionSauce(); // Сперва нужно перейти на любой другой раздел, иначе "незачет"
         objMainPage.clickSectionBuns();
-        objMainPage.isSectionBunsVisible();
+        assertEquals("Булки", objMainPage.getCurrentSectionType());
     }
 
     @Test
     @DisplayName("Переход к секции Соусы")
     public void openSectionSauceTest() {
         objMainPage.openMainPage();
+        objMainPage.waitForLoadHomePage();
         objMainPage.clickConstructorButton();
         objMainPage.clickSectionSauce();
-        objMainPage.isSectionSauceVisible();
+        assertEquals("Соусы", objMainPage.getCurrentSectionType());
     }
 
     @Test
     @DisplayName("Переход к секции Начинки")
     public void openSectionFillingTest() {
         objMainPage.openMainPage();
+        objMainPage.waitForLoadHomePage();
         objMainPage.clickConstructorButton();
         objMainPage.clickSectionFilling();
-        objMainPage.isSectionFillingVisible();
+        assertEquals("Начинки", objMainPage.getCurrentSectionType());
     }
 
 }
